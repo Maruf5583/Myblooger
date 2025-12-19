@@ -1,0 +1,75 @@
+﻿@using MyBlog.Enums
+@model List<Post>
+
+@{
+    ViewData["title"] = "list of Blog";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>All blogs</h2>
+
+    <form class="app-search d-none d-lg-block ms-2 d-flex" method="get" asp-action="List">
+        <div class="position-relative me-2">
+            <input type="text" name="searching" class="form-control" placeholder="Search..." />
+            <span class="bx bx-search-alt"></span>
+            <select name="status" asp-items="Html.GetEnumSelectList<Status>()">
+                <option value="">Select status</option>
+            </select>
+
+
+            <button type="submit" class="btn btn-primary">
+                Search blog
+            </button>
+        </div>
+    </form>
+
+    <div>
+        <a asp-action="Create" class="btn btn-success">Add New Post</a>
+    </div>
+</div>
+
+<table class="table shadow rounded bg-white p-3">
+    <thead>
+        <tr>
+            <th width="200">Media</th>
+            <th scope="col">Title</th>
+            <th scope="col">Published</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (Model.Any())
+        {
+            foreach (var post in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="@post.Media" alt="@post.Title" asp-append-version="true" class="w-100" />
+                    </td>
+
+                    <td>@post.Title</td>
+                    <td>@post.PublishedAt</td>
+                    <td>@post.Status</td>
+
+                    <td>
+                        <a class="btn btn-sm btn-primary"
+                           asp-action="Edit"
+                           asp-route-id="@post.Id">Edit</a>
+                        <a class="btn btn-sm btn-info text-white">View</a>
+                        <a class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5" class="text-center">No Post Found</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+

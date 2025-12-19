@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Add Two Numbers";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <!-- Card with shadow -->
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-body p-4">
+                    <h3 class="text-center mb-4 text-primary">
+                        ➕ Add Two Numbers
+                    </h3>
+
+                    <form asp-action="Add" method="post">
+                        <div class="mb-3">
+                            <label class="form-label">First Number</label>
+                            <input type="number" 
+                                   name="firstNumber"
+                                   class="form-control"
+                                   placeholder="Enter first number"
+                                   required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Second Number</label>
+                            <input type="number"
+                                   name="secondNumber"
+                                   class="form-control"
+                                   placeholder="Enter second number"
+                                   required />
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                Add Numbers
+                            </button>
+                        </div>
+                    </form>
+
+                    @if (ViewBag.Result != null)
+                    {
+                        <div class="text-center mt-4">
+                            <button class="btn btn-success btn-lg shadow-sm" disabled>
+                                Result : @ViewBag.Result
+                            </button>
+                        </div>
+                    }
+
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger mt-3 text-center">
+                            @ViewBag.Error
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
